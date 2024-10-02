@@ -1,31 +1,31 @@
-# conjunto finito de estados
-S = ['S0', 'S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8']
-
 # alfabeto finito de entradas
-I = ['m25', 'm50', 'm100', 'b']
+I = ['b','m25', 'm50', 'm100']
 
-# alfabeto finito de saídas
-O = ['t25', 't50', 't100', 'r', 'n']
+#estado inicial
+S0 = 0
 
-# estado inicial
-S0 = S[0]
+#tabela de estados
+T = [
+    [('s0', 'n'), ('s1', 'n'), ('s2', 'n'), ('s4', 'n')],    # s0
+    [('s1', 'n'), ('s1', 'n'), ('s2', 'n'), ('s4', 'n')],    # s1
+    [('s2', 'n'), ('s1', 'n'), ('s2', 'n'), ('s4', 'n')],    # s2
+    [('s3', 'n'), ('s5', 'n'), ('s6', 'n'), ('s8', 'n')],    # s3
+    [('s4', 'n'), ('s5', 'n'), ('s6', 'n'), ('s8', 'n')],    # s4
+    [('s5', 'n'), ('s5', 'n'), ('s6', 'n'), ('s8', 't25')],  # s5
+    [('s6', 'n'), ('s7', 'n'), ('s7', 't50'), ('s8', 't50')],# s6
+    [('s7', 'n'), ('s7', 'n'), ('s7', 't50'), ('s8', 't100')],# s7
+    [('s8', 'r'), ('s8', 't25'), ('s8', 't50'), ('s8', 't100')] # s8
+]
 
-# função de transição de estados (não sei como fazer)
-T = [[[], []], ]
-
-valor = 0.0
-troco = 0.0
-estado = S0
-
-# função que executa o autômato
-def reconhecer(valor_entrada):
-
-
-
-# # testes
-# if __name__ == '__main__':
-#     reconhecer('0100') # aceita
-#     reconhecer('010') #  rejeita
-
-
-
+def processa_entrada(*alfabeto):
+    mapa_entradas = {
+        'b': 0,
+        'm25': 1,
+        'm50': 2,
+        'm100': 3,
+    }
+    
+    # processar cada entrada
+    for entrada in alfabeto:
+        if entrada not in mapa_entradas:
+            raise ValueError(f"Entrada inválida: {entrada}")
